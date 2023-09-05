@@ -16,19 +16,21 @@ class BookingController extends Controller
     public function store(Request $request){
         DB::beginTransaction();
         try{   
+            // dd($request->request);
             Booking::create([
                 'ticket_number' => $request->ticket_number,
                 'user_id' => $request->user_id,
                 'client_id' => $request->client_id,
                 'vehicles_assign_id' => $request->vehicles_assign_id,
-                'boarding_point' => $request->boarding_point,
-                'dropping_point' => $request->dropping_point,
+                'seat' => $request->seat,
+                'bording_point' => $request->boarding_point,
+                'droppint_point' => $request->droppint_point,
                 'cost' => $request->cost,
                 'date' => $request->date,
                 'time' => $request->time,
                 'status' => false,
             ]);
-            // DB::commit();
+            DB::commit();
         }catch(\Throwable $th){
             dd($th);
             DB::rollback();
